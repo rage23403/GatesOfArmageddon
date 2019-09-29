@@ -1,6 +1,6 @@
 #include "GameEngine.h"
 
-
+const int TARGET_FPS = 60;
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
@@ -34,7 +34,12 @@ bool GameEngine::init()
 
 
 	knightSheet.init("d:\\work\\knightframes.png", { 256, 256 }, { 32, 32 });
-	tileSheet.init("d:\\work\\tileset_new.png", { 512, 512 }, { 32, 32 });
+	//tileSheet.init("d:\\work\\tileset_new.png", { 512, 512 }, { 32, 32 });
+
+	if (!map.load("resources\\level_01.tmx")) {
+		cout << "Failed to load map" << endl;
+		return false;
+	}
 
 	return true;
 }
@@ -56,14 +61,22 @@ bool GameEngine::run()
 	}
 	state = Running;
 
+	long targetFrameTime = 1000 / TARGET_FPS;
 	long start = SDL_GetTicks();
 	int count = 0;
 
 	while(state != Done)
 	{
+		long prev = SDL_GetTicks();
 		update();
 
 		long end = SDL_GetTicks();
+		long frameTime = end - prev;
+
+		if (frameTime < targetFrameTime) 
+		{
+			SDL_Delay(targetFrameTime - frameTime);
+		}
 
 		if (end - start >= 1000) {
 			_RPT1(0, "FPS: %d\r\n", count);
@@ -75,30 +88,15 @@ bool GameEngine::run()
 	}
 
 	quit();
+
+	return true;
 }
 
 void GameEngine::update()
 {
 	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
 
-	for (int yy = 0; yy < 20; yy++) {
-		for (int xx = 0; xx < 20; xx++) {
-			SDL_Rect rc;
-			rc.x = xx * 32;
-			rc.y = yy * 32;
-			rc.h = 32;
-			rc.w = 32;
-
-			SDL_Rect src;
-			src.x = 0;
-			src.y = 1 * 32;
-			src.h = 32;
-			src.w = 32;
-
-			tileSheet.draw(screenSurface, { 1, 1 }, rc);
-
-		}
-	}
+	map.draw(screenSurface, { 0, -y });
 
 	ani++;
 

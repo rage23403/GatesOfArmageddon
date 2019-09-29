@@ -5,6 +5,10 @@
 #include "SDL_image.h"
 #include <stdio.h>
 #include <string>
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 struct Size
 {

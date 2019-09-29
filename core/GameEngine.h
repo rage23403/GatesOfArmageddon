@@ -1,6 +1,7 @@
 #pragma once
 #include "common.h"
 #include "SpriteSheet.h"
+#include "TileMap.h"
 
 enum GameState
 {
@@ -35,5 +36,6 @@ private:
 	int ani = 0;
 	int y = 0;
 
+	TileMap map;
 };
 

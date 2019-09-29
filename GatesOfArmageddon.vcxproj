@@ -104,7 +104,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -153,15 +153,18 @@
   <ItemGroup>
     <ClCompile Include="core\GameEngine.cpp" />
     <ClCompile Include="core\SpriteSheet.cpp" />
+    <ClCompile Include="core\TileMap.cpp" />
     <ClCompile Include="GatesOfArmageddon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="resources\level_01.tmx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\common.h" />
     <ClInclude Include="core\GameEngine.h" />
     <ClInclude Include="core\SpriteSheet.h" />
+    <ClInclude Include="core\TileMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
