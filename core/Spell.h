@@ -21,10 +21,8 @@ enum SpellType
 class Spell
 {
 public:
-	Spell(int m, int d);
+	Spell();
 	~Spell();
-	int Cast(int MP);
-	int CastTwo(int MP);
 private:
 	int MPCost;
 	int Damage;
